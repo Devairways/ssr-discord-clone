@@ -1,0 +1,24 @@
+@import "global/Variables";
+
+.navPosition{
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+	overflow-y: hidden;
+}
+
+.serverPanel{
+	height: 60px;
+	width: 60px;
+	border-radius: 50%;
+	background: #36393f;
+	margin-top: 15px;
+	transition: all .5s ease;
+	&:hover{
+		border-radius: 25%;
+		background: #7289da;
+		img{
+		filter: grayscale(200%) brightness(150%)
+	}
+	}
+}

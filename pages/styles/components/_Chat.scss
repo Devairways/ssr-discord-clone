@@ -1,0 +1,39 @@
+@import 'global/Variables';
+
+.flex{
+	display: flex;
+	flex-direction: row;
+}
+
+.flexBox1{
+	width: 85%;
+}
+
+.flexBox2{
+	width: 240px;
+	background: $medium-black;
+	margin-left: -24px;
+	z-index: 2;
+}
+
+.chatContent{
+	height: 80vh;
+	overflow-y: scroll;
+	overflow-x: hidden;
+}
+
+.chatMsg{
+	padding-left: 10px;
+}
+
+.chatInput{
+	width: 85%;
+	font-size: medium;
+	height: 20px;
+	margin-left: 2%;
+	margin-bottom: 20px;
+}
+
+.marg{
+	margin:7px 10px;
+}

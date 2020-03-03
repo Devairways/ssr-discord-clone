@@ -1,0 +1,29 @@
+
+@import 'components/App';
+@import 'components/Nav';
+@import 'components/Chat';
+@import 'components/Sidebar';
+@import 'components/Userpanel';
+@import 'global/Variables';
+@import 'global/Mixins';
+
+.grid{
+	display:grid;
+	grid-template-columns: 100px .75fr 3fr;
+	height: 100vh;
+}
+.gridBox1{
+	grid-column: 1/2;
+	background: $darker-black;
+
+}
+
+.gridBox2{
+	grid-column: 2/3;
+	background: $medium-black;
+}
+
+.gridBox3{
+	grid-column: 3/4;
+	background: $light-black;
+}
