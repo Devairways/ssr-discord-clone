@@ -10107,7 +10107,7 @@ var LoginPage = function LoginPage() {
 
 /***/ }),
 
-/***/ 4:
+/***/ 3:
 /*!**************************************************************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2Fregister&absolutePagePath=C%3A%5CUsers%5CRoy%5CDesktop%5Cprojects%5Cdiscorderly%5CServer%5Cpages%5Cregister.tsx ***!
   \**************************************************************************************************************************************************************/
@@ -10130,5 +10130,5 @@ module.exports = dll_82519ec661270f7f484f;
 
 /***/ })
 
-},[[4,"static/runtime/webpack.js","styles"]]]);
+},[[3,"static/runtime/webpack.js","styles"]]]);
 //# sourceMappingURL=register.js.map
