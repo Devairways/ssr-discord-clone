@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import Link from "next/link";
+import Router from 'next/router'
 
 import {registerUser} from "./Services/Users";
 
@@ -17,23 +18,25 @@ const LoginPage = () => {
                                             error: ''
                                         }); 
        
-    
+    // store inputvalues in state
     const handleChange = (e) => {
         const { name, value } = e.target;
         setRegister({...register, [name]: value, "error": "" });
     }
 
-    const handleSubmit = (e) => {
+    // registe a new user
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setRegister({...register, submitted: true });
-        const { username, password } = register;
-        // stop here if form is invalid
-        if (!(username && password)) {
+        const { username, password, email } = register;
+        // check for required inputs
+        if (!(username && password && email)) {
             return;
         }
         setRegister({...register, loading: true });
-        registerUser(username, password)
-        // .then(data => {data && console.log(data)})
+        registerUser(username, password, email)
+        .then(data => {if(data.message){Router.push("/")}})
+
     }
 
         return(
@@ -46,7 +49,7 @@ const LoginPage = () => {
                             {register.submitted && !register.username &&
                                 <div className="help-block">Username is required</div>
                             }
-                            <input type="email" className="" name="password" value={register.email} onChange={handleChange} placeholder="EMAIL"/>
+                            <input type="email" className="" name="email" value={register.email} onChange={handleChange} placeholder="EMAIL"/>
                             {register.submitted && !register.email &&
                                 <div className="help-block">Email is required</div>
                             }
@@ -61,9 +64,7 @@ const LoginPage = () => {
                         </div>
                         <span className="form__error">{register.error}</span>
                         <div className="" >
-                            <Link href="/dashboard">
-                                <a>Go</a>
-                            </Link>
+                            <input type="submit" placeholder="Go" onClick={handleSubmit}/>
                             <Link href="/">
                                 <h1>Back</h1>
                             </Link>

@@ -1,5 +1,7 @@
+const User = require('../models/user');
+
 const regHandler = (req,res)=>{
-	 // creeerd new user object
+	 // create new user object
     const user = new User({
       username: req.body.username,
       email: req.body.email,
@@ -21,4 +23,4 @@ const regHandler = (req,res)=>{
       });
 };
 
-module.exports = regHandler;
+module.exports = { regHandler };

@@ -1,8 +1,8 @@
 import React from 'react';
 
-
+//authenticate login credentials
 export const authenticate = (username, password) => {
-	fetch("http://localhost:3001/login",{
+	return fetch("http://localhost:3000/login",{
 			method: 'POST',
 	        headers: {
 	            'Accept': 'application/json',
@@ -16,22 +16,24 @@ export const authenticate = (username, password) => {
 			.then(response => {
 				if (response.status == 200)
 					return response
-		});
+		    })
+			.catch(err => {return `something went wrong error: ${err}`});
 	}
 
-export const registerUser = (username, password) => {
- fetch("http://localhost:3001/register",{
- 		method: 'POST',
-         headers: {
-             'Accept': 'application/json',
-             'Content-Type': 'application/json'
-                   },
-        body: JSON.stringify({
-		    name: username,
-		    password: password
+// Register a new user
+export const registerUser = async (username, password, email) => {
+ 	return fetch("http://localhost:3000/register",{
+	 		method: 'POST',
+	        headers: {
+	             'Accept': 'application/json',
+	             'Content-Type': 'application/json'
+	                   },
+	        body: JSON.stringify({
+			    username,
+			    password,
+			    email
+				})
 			})
-		})
-		.then(response => {
-				return response
- 	});
+			.then(async res => { return res.json()})
+			.catch(err => {return `something went wrong error: ${err}`});
 	}
