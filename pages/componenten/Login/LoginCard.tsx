@@ -1,19 +1,19 @@
 import React, { useContext, useState } from "react";
 import Link from "next/link";
-import Router from 'next/router';
+import Router from "next/router";
 
-import { store } from '../../Services/store';
-import {authenticate} from "../../Services/Users";
+import { store } from "../../Services/store";
+import { authenticate } from "../../Services/Users";
 
 
-const LoginCard = () => {
+const LoginCard = ({ setRoute }) => {
     const userData = useContext(store);
     const { dispatch } = userData;
-    const [login, setlogin] = useState({   username: '',
-                                            password: '',
+    const [login, setlogin] = useState({   username: "",
+                                            password: "",
                                             submitted: false,
                                             loading: false,
-                                            error: ''
+                                            error: ""
                                         }); 
        
     
@@ -25,7 +25,7 @@ const LoginCard = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         setlogin({...login, submitted: true });
-        const { username, password } = login;
+        const { username, password, error} = login;
         // stop here if form is invalid
         if (!(username && password)) {
             return;
@@ -33,16 +33,16 @@ const LoginCard = () => {
         setlogin({...login, loading: true });
         authenticate(username, password)
         .then(data => {
-            if(data){
-                console.log("console.loggiiinnngg",data.user[0])
-                dispatch({type: 'userLogin', payload: "data.user[0]"})
-                Router.push("/dashboard")
+            if(data._id){
+                dispatch({type: "userLogin", payload: data})
+                Router.push("/dashboard");
             }
+            else{setlogin({...login, loading: false, error: "user/password combo incorrect"})}
         })
     }
 
 
-    return(
+    return(login.loading ? <h1>Loading...</h1> :
          <div className="" >
             <img src="" alt="logo" className="" />
             <div className="">

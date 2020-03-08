@@ -1,21 +1,19 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import Router from 'next/router';
+import Router from "next/router";
 
-import {registerUser} from "../../Services/Users";
-
-import "../../styles/imports.scss";
+import { registerUser } from "../../Services/Users";
 
 
-const RegisterCard = () => {
+const RegisterCard = ({ setRoute }) => {
     const [register, setRegister] = useState({   
-                                            username: '',
-                                            email: '',
-                                            password: '',
-                                            password2: '',
+                                            username: "",
+                                            email: "",
+                                            password: "",
+                                            password2: "",
                                             submitted: false,
                                             loading: false,
-                                            error: ''
+                                            error: ""
                                         }); 
        
     // store inputvalues in state
@@ -28,9 +26,9 @@ const RegisterCard = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setRegister({...register, submitted: true });
-        const { username, password, email } = register;
+        const { username, password, password2, email } = register;
         // check for required inputs
-        if (!(username && password && email)) {
+        if (!(username && password && password2 && email)) {
             return;
         }
         setRegister({...register, loading: true });
@@ -64,8 +62,8 @@ const RegisterCard = () => {
                         <span className="form__error">{register.error}</span>
                         <div className="" >
                             <input type="submit" placeholder="Go" onClick={handleSubmit}/>
-                            <Link href="/">
-                                <h1>Back</h1>
+                            <Link href="/"  replace>
+                                <h1 onClick={e =>{setRoute("/")}}>Back</h1>
                             </Link>
                         </div>
                     </form>

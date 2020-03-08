@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 
 import LoginCard from "./componenten/Login/LoginCard";
@@ -8,13 +8,21 @@ import "./styles/imports.scss";
 
 
 const IndexPage = () => {
+    const [route, setRoute] = useState("");
+    const [loading, setLoading] = useState(false);
 
-    useEffect(()=>{},[])
+    useEffect(()=>{
+        setRoute(window.location.pathname);
+        setLoading(false);
+    },[])
     
-        return(
-             <div>
-                <LoginCard/>
-            </div>
+        return(route && !loading ? 
+            <div>
+            {
+                route == "/" ? <LoginCard setRoute={setRoute}/> : <RegisterCard setRoute={setRoute}/>
+            }
+            </div> :
+            <h1>Loading.....</h1>
             );
 }
 

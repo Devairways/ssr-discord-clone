@@ -1,16 +1,15 @@
 const User = require('../models/user');
 
 const authHandler = (req,res)=>{
-  console.log(req)
   console.log(req.body)
   // query mongoDB 
 	User
-    .find({ username: req.body.username })
+    .find({ username: req.body.username, password: req.body.password })
     .then( user =>{
         // check if user is found
         if(user.length > 0){
           user.online = true;
-          // user.save();
+          console.log(user)
           res.status(200).json({user}) 
         }
         else{

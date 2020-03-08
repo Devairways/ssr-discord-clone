@@ -1,4 +1,4 @@
-import React, {createContext, useReducer} from 'react';
+import React, {createContext, useReducer} from "react";
 
 const initialState = {init:"initialllllllyyyyy"};
 const store = createContext(initialState);
@@ -6,9 +6,9 @@ const { Provider } = store;
 
 const StateProvider = ( { children } ) => {
   const [state, dispatch] = useReducer((state, action) => {
-    console.log("aasasa state", action.type, action.payload)
+    console.log("new state entry: ", action.type, action.payload)
     switch(action.type) {
-      case 'userLogin':
+      case "userLogin":
         const newState = Object.assign({},{data:action.payload})
         return newState;
       default:

@@ -1,5 +1,7 @@
-import App from 'next/app';
-import { StateProvider } from './Services/store';
+import App from "next/app";
+import { StateProvider } from "./Services/store";
+
+import "./styles/imports.scss";
 
 const MyApp = ({ Component, pageProps }) => {
 	return( 

@@ -1,7 +1,6 @@
 import React from  "react";
-import { store } from '../../Services/store';
+import { store } from "../../Services/store";
 
-import '../../styles/imports.scss';
 
 const Nav = ()=>{
 	return(
