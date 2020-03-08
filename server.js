@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 
 const registreer = require('./controller/registreer');
+const login = require('./controller/login');
 
 const User = require('./models/user');
 const Channel = require('./models/channel');
@@ -35,26 +36,32 @@ mongoose.connect(process.env.DB_URL, { reconnectTries: 5 })
 
 // Routes
 app.prepare().then(() => {
-  const server = express()
+  const server = express();
 
   // Middleware
-  server.use(bodyParser.json())
-  server.use(morgan('tiny'))
+  server.use(bodyParser.json());
+  server.use(morgan('tiny'));
   
+  // -requests login
   server.get('/', (req, res) => {
+    return app.render(req, res, '/', req.query);
+  });
+  server.post('/', (req,res) => { login.authHandler(req,res) });
+
+
+  //requests registering user
+  server.get('/register', (req, res) => {
     return app.render(req, res, '/', req.query)
-  })
-
-  server.get('/register', (req, res) => {console.log(req)
-    return app.render(req, res, '/Register', req.query)
-  })
-
-  server.get('/dashboard', (req, res) => {
-    return app.render(req, res, '/Dashboard', req.query)
-  })
-
+  });
   server.post('/register', (req,res) => { registreer.regHandler(req,res) });
 
+
+  // requests dashboard use
+  server.get('/dashboard/:id', (req, res) => {
+    // return app.render(req, res, '/Dashboard', req.query)
+    res.send({req});
+  });
+  
   server.all('*', (req, res) => {
     return handle(req, res)
   })

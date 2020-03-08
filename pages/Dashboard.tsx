@@ -1,5 +1,4 @@
 import React from "react";
-import Link from "next/link";
 
 import Nav from "./componenten/Nav/Nav";
 import SideBar from  "./componenten/Sidebar/Sidebar";
