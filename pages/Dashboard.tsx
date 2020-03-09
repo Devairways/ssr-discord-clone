@@ -8,7 +8,7 @@ import Content from  "./componenten/Chat/Content";
 
 
 const DashBoard = () => {
-	const userData = useContext(store)
+	const userData = useContext(store);
 
 	useEffect(()=>{
 		if(!userData.state){

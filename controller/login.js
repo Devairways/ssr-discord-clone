@@ -1,7 +1,6 @@
 const User = require('../models/user');
 
 const authHandler = (req,res)=>{
-  console.log(req.body)
   // query mongoDB 
 	User
     .find({ username: req.body.username, password: req.body.password })
@@ -9,7 +8,6 @@ const authHandler = (req,res)=>{
         // check if user is found
         if(user.length > 0){
           user.online = true;
-          console.log(user)
           res.status(200).json({user}) 
         }
         else{

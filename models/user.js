@@ -22,8 +22,8 @@ const userSchema = new mongoose.Schema({
         minlength: 6,
         required: true,
     },
-    channels: [{
-        type: mongoose.Schema.Types.ObjectId,
+    servers: [{
+        type: String,
         ref: "Channel",
     }],
     profile_picture: {

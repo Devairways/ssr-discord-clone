@@ -5,12 +5,10 @@ const dotenv = require("dotenv");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
 
-const registreer = require("./controller/registreer");
+const registrate = require("./controller/registrate");
 const login = require("./controller/login");
-
-const User = require("./models/user");
-const Channel = require("./models/channel");
-const Messages = require("./models/messages");
+const channels = require("./controller/channels");
+const servers = require("./controller/servers");
 
 
 // configs voor server
@@ -42,26 +40,40 @@ app.prepare().then(() => {
   server.use(bodyParser.json());
   server.use(morgan("tiny"));
   
-  // -requests login
+  // requests login
   server.get("/", (req, res) => {
     return app.render(req, res, "/", req.query);
   });
   server.post("/", (req,res) => { login.authHandler(req,res) });
 
 
-  //requests registering user
+  // requests registering user
   server.get("/register", (req, res) => {
     return app.render(req, res, "/", req.query)
   });
-  server.post("/register", (req,res) => { registreer.regHandler(req,res) });
+  server.post("/register", (req,res) => { registrate.regHandler(req,res) });
 
 
   // requests dashboard use
-  server.get("/dashboard/:id", (req, res) => {
-    // return app.render(req, res, "/Dashboard", req.query)
-    res.send({req});
+  server.get("/dashboard", (req, res) => {
+    return app.render(req, res, "/Dashboard", req.query)
   });
   
+  // server routes
+  server.get("/server/:server", (req, res) => { servers.getServer(req,res) });
+
+  server.post("/server", (req, res) => { servers.createServer(req,res) });
+
+  server.put("/server", (req, res) => { servers.updateServer(req,res) });
+
+  // channel routes
+  server.get("/channel/:server", (req, res) => { channels.getChannel(req,res) });
+
+  server.post("/channel", (req, res) => { channels.createChannel(req,res) });
+
+  server.put("/channel", (req, res) => { channels.updateChannel(req,res) });
+  
+  // catch all others
   server.all("*", (req, res) => {
     return handle(req, res)
   })
