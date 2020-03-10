@@ -47,12 +47,12 @@ const getChannel = (req,res)=>{
 
 // update a channel messages array
 const updateChannel = (req,res)=>{
-  const { _id, channel } = req.body;
+  const { _id, msg, channel } = req.body;
   // update channel object
   Channel
     .update(
     { channel_name: channel }, 
-    { $push: { messages: _id } 
+    { $push: { messages: { text: msg, author: _id } } 
     })
     .then(result => {
       res.status(200).json({

@@ -1,11 +1,9 @@
 const mongoose = require("mongoose");
+const Message = require('./messages');
 
 const channelSchema = new mongoose.Schema({
     messages: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Message",
-        },
+        Message
     ],
     channel_name: {
         type: String,
