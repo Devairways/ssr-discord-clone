@@ -9,6 +9,7 @@ const registrate = require("./controller/registrate");
 const login = require("./controller/login");
 const channels = require("./controller/channels");
 const servers = require("./controller/servers");
+const users = require("./controller/users");
 
 
 // configs voor server
@@ -20,7 +21,7 @@ const handle = app.getRequestHandler()
 
 
 // MongoDB Server
-mongoose.connect(process.env.DB_URL, { reconnectTries: 5 })
+mongoose.connect(process.env.DB_URL, { useNewUrlParser: true, reconnectTries: 5 })
     .then(()=>{
       console.log("MongoDB connected");
        
@@ -46,18 +47,22 @@ app.prepare().then(() => {
   });
   server.post("/", (req,res) => { login.authHandler(req,res) });
 
-
-  // requests registering user
+  // request register
   server.get("/register", (req, res) => {
     return app.render(req, res, "/", req.query)
   });
-  server.post("/register", (req,res) => { registrate.regHandler(req,res) });
-
 
   // requests dashboard use
   server.get("/dashboard", (req, res) => {
     return app.render(req, res, "/Dashboard", req.query)
   });
+
+  
+  // user routes
+  server.post("/register", (req,res) => { registrate.regHandler(req,res) });
+ 
+  server.put("/user/:user", (req, res) => { users.updateUser(req,res) });
+
   
   // server routes
   server.get("/server/:server", (req, res) => { servers.getServer(req,res) });
@@ -73,6 +78,8 @@ app.prepare().then(() => {
 
   server.put("/channel", (req, res) => { channels.updateChannel(req,res) });
   
+ 
+
   // catch all others
   server.all("*", (req, res) => {
     return handle(req, res)

@@ -22,10 +22,12 @@ const userSchema = new mongoose.Schema({
         minlength: 6,
         required: true,
     },
-    servers: [{
-        type: String,
-        ref: "Channel",
-    }],
+    servers: [
+        {
+            type: String,
+            ref: "Channel",
+        },
+    ],
     profile_picture: {
         type: String,
         default: "/img/placeholder.png",

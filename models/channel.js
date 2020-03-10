@@ -1,9 +1,23 @@
 const mongoose = require("mongoose");
 const Message = require('./messages');
 
+const messageSchema = new mongoose.Schema({
+    text: {
+        type: String,
+    },
+    author: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+    },
+    created_at: {
+        type: Date,
+        default: Date.now,
+    },
+});
+
 const channelSchema = new mongoose.Schema({
     messages: [
-        Message
+        messageSchema
     ],
     channel_name: {
         type: String,

@@ -4,7 +4,7 @@ const serverSchema = new mongoose.Schema({
     channels: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "channels",
+            ref: "Channels",
         },
     ],
     creator: {
