@@ -1,16 +1,14 @@
-import React, { useContext } from  "react";
-import { store } from "../../Services/store";
+import React from  "react";
 
 
-const UserPanel = ()=>{
-	const userData = useContext(store);
+const UserPanel = ({ username, _id, img })=>{
 
 	return(
 		<div className="userPanel flex">
-			<img src="/assets/home_icoon.svg"  alt="user"/>
+			<img src={img}  alt="user"/>
 			<div>
-				<h4>{userData.state.data.username}</h4>
-			    <p>#{userData.state.data._id.slice(1,5)}</p>
+				<h4>{username}</h4>
+			    <p>#{_id}</p>
 			</div>
 			
 		</div>

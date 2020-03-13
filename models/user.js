@@ -24,9 +24,14 @@ const userSchema = new mongoose.Schema({
     },
     servers: [
         {
+            server_name: {
             type: String,
-            ref: "Channel",
-        },
+            },
+            _id: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Server",
+            }
+        }
     ],
     profile_picture: {
         type: String,

@@ -29,7 +29,7 @@ const getServer = (req,res)=>{
   const { server } = req.params;
   // collect server objects
   Server
-    .find({server_name: server})
+    .find({_id: server})
     .then(result => {
       res.status(200).json({
         message: "server gevonden",

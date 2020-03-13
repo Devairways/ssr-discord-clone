@@ -1,6 +1,6 @@
-import React, {createContext, useReducer} from "react";
+import React, { createContext, useReducer } from "react";
 
-const initialState = {init:"initialllllllyyyyy"};
+const initialState = { authed: false };
 const store = createContext(initialState);
 const { Provider } = store;
 
@@ -9,7 +9,7 @@ const StateProvider = ( { children } ) => {
     console.log("new state entry: ", action.type, action.payload)
     switch(action.type) {
       case "userLogin":
-        const newState = Object.assign({},{data:action.payload})
+        const newState = Object.assign({},state, {data:action.payload, authed:true})
         return newState;
       default:
         throw new Error();

@@ -1,25 +1,31 @@
-import React, { useContext, useEffect } from  "react";
-import { store } from "../../Services/store";
+import React, { useContext, useEffect, useState } from  "react";
+import { store } from '../../Services/store';
 
 
-const Nav = ()=>{
-	const userData = useContext(store);
-
-	useEffect(()=>{},[])
+const Nav = ({ changeRoute })=>{
+	const user = useContext(store)
+	const [data, setData] = useState({ servers: [] });
+	 
+    useEffect(()=>{
+    	if (user.state){
+    		setData({ servers: user.state.data.servers });
+    		return;
+    	}
+    },[])
 
 	return(
 		<nav className="gridBox1 navPosition">
 			<div>
 				<div className="serverPanel centerContent">
-					<img src="/assets/home_icoon.svg"  alt="home"/>
+					 <img src="/assets/home_icoon.svg"  alt="home"/>
 				</div>
 				<div className="border2"/>
 				{
 					// render subscribed server icons
-					userData.state.data.servers.map(server => {
+					data.servers.map(server => {
 						return(
 							<div className="serverPanel centerContent">
-						    	<img src="/assets/plus_icoon.svg" height="30px" alt={server}/>
+						    	<img src="/assets/home_icoon.svg" height="30px" id={server._id} alt={server.name} onClick={e => changeRoute(e)}/>
 							</div>
 							)
 						}

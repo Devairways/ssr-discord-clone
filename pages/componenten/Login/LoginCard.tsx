@@ -9,11 +9,11 @@ import { authenticate } from "../../Services/Users";
 const LoginCard = ({ setRoute }) => {
     const userData = useContext(store);
     const { dispatch } = userData;
-    const [login, setlogin] = useState({   username: "",
-                                            password: "",
-                                            submitted: false,
-                                            loading: false,
-                                            error: ""
+    const [login, setlogin] = useState({ username: "",
+                                         password: "",
+                                         submitted: false,
+                                         loading: false,
+                                         error: ""
                                         }); 
        
     
@@ -34,10 +34,10 @@ const LoginCard = ({ setRoute }) => {
         authenticate(username, password)
         .then(data => {
             if(data._id){
-                dispatch({type: "userLogin", payload: data})
+                dispatch({type: "userLogin", payload: data })
                 Router.push("/dashboard");
             }
-            else{setlogin({...login, loading: false, error: "user/password combo incorrect"})}
+            else{setlogin({...login, loading: false, error: "user/password combo unknown"})}
         })
     }
 

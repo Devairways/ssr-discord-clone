@@ -5,8 +5,8 @@ import Header from  "./Header";
 import ChatRoom from  "./ChatRoom";
 
 
-const Content = ()=>{
-	const userData = useContext(store);
+const Content = ({ route })=>{
+	
   	
 	return(
 		<div className="gridBox3">
