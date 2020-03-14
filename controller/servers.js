@@ -29,7 +29,7 @@ const getServer = (req,res)=>{
   const { server } = req.params;
   // collect server objects
   Server
-    .find({_id: server})
+    .find({ _id: server })
     .then(result => {
       res.status(200).json({
         message: "server gevonden",
@@ -46,12 +46,12 @@ const getServer = (req,res)=>{
 
 // update a server channels array
 const updateServer = (req,res)=>{
-  const { _id, server_name } = req.body;
+  const { chanId, chanName, id } = req.body;
   // update server object
   Server
     .update(
-    { server_name: server_name }, 
-    { $addToSet: { channels: _id }},
+    { _id: id }, 
+    { $addToSet: { channels: { id: chanId, channel_name: chanName} }},
     (error, success) =>{
         if (error) {
             console.log(error);

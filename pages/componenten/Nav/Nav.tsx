@@ -4,11 +4,11 @@ import { store } from '../../Services/store';
 
 const Nav = ({ changeRoute })=>{
 	const user = useContext(store)
-	const [data, setData] = useState({ servers: [] });
+	const [servers, setServers] = useState([]);
 	 
     useEffect(()=>{
     	if (user.state){
-    		setData({ servers: user.state.data.servers });
+    		setServers(user.state.data.servers);
     		return;
     	}
     },[])
@@ -17,15 +17,15 @@ const Nav = ({ changeRoute })=>{
 		<nav className="gridBox1 navPosition">
 			<div>
 				<div className="serverPanel centerContent">
-					 <img src="/assets/home_icoon.svg"  alt="home"/>
+					 <img src="/assets/home_icoon.svg"  alt="home" id="/" onClick={e => changeRoute(e)}/>
 				</div>
 				<div className="border2"/>
 				{
 					// render subscribed server icons
-					data.servers.map(server => {
+					servers.map(server => {
 						return(
 							<div className="serverPanel centerContent">
-						    	<img src="/assets/home_icoon.svg" height="30px" id={server._id} alt={server.name} onClick={e => changeRoute(e)}/>
+						    	<img src="/assets/home_icoon.svg" height="30px" id={server.id} alt={server.name} onClick={e => changeRoute(e)}/>
 							</div>
 							)
 						}

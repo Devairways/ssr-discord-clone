@@ -30,7 +30,7 @@ const getChannel = (req,res)=>{
   const { server } = req.params;
   // collect channel objects
   Channel
-    .find({server: server})
+    .find({ _id: channel })
     .then(result => {
       res.status(200).json({
         message: "gevonden kanalen: " + result.length,
@@ -51,7 +51,7 @@ const updateChannel = (req,res)=>{
   // update channel object
   Channel
     .update(
-    { channel_name: channel }, 
+    { _id: channel }, 
     { $push: { messages: { text: msg, author: _id } } 
     })
     .then(result => {

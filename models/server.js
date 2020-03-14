@@ -1,11 +1,18 @@
 const mongoose = require("mongoose");
 
+const channelListSchema = new mongoose.Schema({
+    channel_name: {
+        type: String,
+    },
+    id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Server",
+    },
+});
+
 const serverSchema = new mongoose.Schema({
     channels: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Channels",
-        },
+        channelListSchema
     ],
     creator: {
         type: mongoose.Schema.Types.ObjectId,

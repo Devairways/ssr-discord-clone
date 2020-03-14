@@ -1,37 +1,37 @@
 import React from  "react";
 
-const channellist = [
-{
-	Channelname:"HIYAAHHH",
- 	list: 
-	[
-		{name:"jonesy palace"},
-		{name:"jonesy palace"},
-		{name:"jonesy palace"},
-		{name:"jonesy palace"},
-	]
-},
-{
-	Channelname:"HIYAAHHH",
- 	list: 
-	[
-		{name:"jonesy palace"},
-		{name:"jonesy palace"},
-		{name:"jonesy palace"},
-		{name:"jonesy palace"},
-	]
-},
-{
-	Channelname:"HIYAAHHH",
- 	list: 
-	[
-		{name:"jonesy palace"},
-		{name:"jonesy palace"},
-		{name:"jonesy palace"},
-		{name:"jonesy palace"},
-	]
-}
-]
+// const channellist = [
+// {
+// 	Channelname:"HIYAAHHH",
+//  	list: 
+// 	[
+// 		{name:"jonesy palace"},
+// 		{name:"jonesy palace"},
+// 		{name:"jonesy palace"},
+// 		{name:"jonesy palace"},
+// 	]
+// },
+// {
+// 	Channelname:"HIYAAHHH",
+//  	list: 
+// 	[
+// 		{name:"jonesy palace"},
+// 		{name:"jonesy palace"},
+// 		{name:"jonesy palace"},
+// 		{name:"jonesy palace"},
+// 	]
+// },
+// {
+// 	Channelname:"HIYAAHHH",
+//  	list: 
+// 	[
+// 		{name:"jonesy palace"},
+// 		{name:"jonesy palace"},
+// 		{name:"jonesy palace"},
+// 		{name:"jonesy palace"},
+// 	]
+// }
+// ]
 
 const ChannelList = ({ list, name, changeChannel })=>{
 
@@ -54,10 +54,9 @@ const ChannelList = ({ list, name, changeChannel })=>{
 				<h3>{name}</h3>
 			</div>
 			{
-			channellist.map((item, i) =>{
+			list.map((item, i) =>{
 					return (<div key={i}>
-								<h3>{item.Channelname}</h3>
-								{createchannels(item.list)}
+								<p>{item.channel_name}</p>
 							</div>
 						)
 				})

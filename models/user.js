@@ -1,6 +1,16 @@
 const   mongoose  = require("mongoose");
 const   validator = require("validator");
 
+const serverListSchema = new mongoose.Schema({
+    server_name: {
+        type: String,
+    },
+    id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Server",
+    },
+});
+
 const userSchema = new mongoose.Schema({
     username: {
         type: String,
@@ -23,15 +33,7 @@ const userSchema = new mongoose.Schema({
         required: true,
     },
     servers: [
-        {
-            server_name: {
-            type: String,
-            },
-            _id: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Server",
-            }
-        }
+        serverListSchema
     ],
     profile_picture: {
         type: String,
