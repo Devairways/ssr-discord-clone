@@ -6,11 +6,11 @@ const { Provider } = store;
 
 const StateProvider = ( { children } ) => {
   const [state, dispatch] = useReducer((state, action) => {
-    console.log("new state entry: ", action.type, action.payload)
     switch(action.type) {
       case "userLogin":
-        const newState = Object.assign({},state, {data:action.payload, authed:true})
-        return newState;
+        return Object.assign({}, state, { data:action.payload, authed:true });
+        case "updateUser":
+        return Object.assign({}, state, { data:action.payload, authed:true });
       default:
         throw new Error();
     };

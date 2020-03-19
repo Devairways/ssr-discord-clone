@@ -1,0 +1,10 @@
+@import "global/Variables";
+
+#modal{
+	position: absolute;
+	height: 300px;
+	width: 500px;
+	margin-left: 45vw;
+	margin-top: 80px;
+	background: $medium-black;
+}

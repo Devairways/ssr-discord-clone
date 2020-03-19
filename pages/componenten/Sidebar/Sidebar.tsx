@@ -5,10 +5,11 @@ import { dataFetch } from "../../Services/dataFetch";
 import ChannelList from  "./Channellist";
 import UserPanel from  "../Userpanel/Userpanel";
 
-const SideBar = ({ route })=>{
+const SideBar = ({ route, changeChannel })=>{
 	const user = useContext(store);
-	const [server, setServer] = useState({  server_name: "",
-											channels:[]
+	const [server, setServer] = useState({
+										server_name: "",
+										channels:[]
 										})
 	const [userData, setData] = useState({
 									  username: "",
@@ -17,26 +18,23 @@ const SideBar = ({ route })=>{
 	                                  friends: []
 	                                }) 
     useEffect(()=>{
-    	if (user.state){
-    		setData({username: user.state.data.username,
-    				 _id: user.state.data._id.slice(1,5),
-    				 friends: user.state.data.friends,
-    				 profile_picture: user.state.data.profile_picture
+    	if (user.state.data){
+    		setData({
+    			username: user.state.data.username,
+				_id: user.state.data._id.slice(1,5),
+				friends: user.state.data.friends,
+				profile_picture: user.state.data.profile_picture
     			});
     	}
     },[])
 
     useEffect(()=>{
     	setServer({...server, server_name: "Home"})
-    	if(route !== "/"){
-    		dataFetch(`server/${route}`)
+    	if(route && route !== "/"){
+    		dataFetch(`servers/${route}`)
     		.then(res => setServer({ server_name: res.server[0].server_name, channels: res.server[0].channels }))
     	}
     },[route])
-
-    const changeChannel = (e) =>{
-    	console.log(e.target)
-    }
 
 	return(
 		<div className="gridBox2 SideBar">

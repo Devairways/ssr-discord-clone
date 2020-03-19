@@ -2,7 +2,7 @@ import React from  "react";
 import ChatBox from  "./Chatbox";
 import MemberList from  "../Memberlist/Memberlist";
 
-const Content = ()=>{
+const Content = ({ messages })=>{
 	return(
 		<div className="flex">
 			<ChatBox/>

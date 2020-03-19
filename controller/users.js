@@ -1,14 +1,15 @@
 const User = require('../models/user');
 
 const updateUser = (req,res)=>{
-  const { user, servItem, servId, param, data} = req.body
+  const { user, servName, servId, param, data} = req.body
   // query mongoDB 
 	User
     .update(
       { _id: user },
-      { $addToSet: { servers: { server_name: servItem, id: servId }}})
+      { $addToSet: { servers: { server_name: servName, id: servId }}},
+      {new: true})
     .then( user =>{
-        // check if user is found
+        console.log(user)
           res.status(200).json({user}) 
       })
       .catch(err => {

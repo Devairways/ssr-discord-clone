@@ -2,10 +2,12 @@ const Server = require('../models/server');
 
 // create a new server
 const createServer = (req,res)=>{
+  const { user, servName, servPicture } = req.body;
 	// create new server object
   const server = new Server({
-    creator: req.body._id,
-    server_name: req.body.server_name
+    creator: user,
+    server_name: servName,
+    server_picture: servPicture
   });
   // push it to server collection
   server
@@ -26,10 +28,14 @@ const createServer = (req,res)=>{
 
 // get servers associated with selected server
 const getServer = (req,res)=>{
+  let filter = {}
   const { server } = req.params;
+  if(server !== "all"){
+    filter = { _id: server };
+  }
   // collect server objects
   Server
-    .find({ _id: server })
+    .find(filter)
     .then(result => {
       res.status(200).json({
         message: "server gevonden",

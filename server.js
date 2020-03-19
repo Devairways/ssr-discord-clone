@@ -60,36 +60,29 @@ app.prepare().then(() => {
   
   // user routes
   server.post("/register", (req,res) => { registrate.regHandler(req,res) });
- 
-  server.put("/user/:user", (req, res) => { users.updateUser(req,res) });
+  server.put("/users", (req, res) => { users.updateUser(req,res) });
 
   
   // server routes
-  server.get("/server/:server", (req, res) => { servers.getServer(req,res) });
-
-  server.post("/server", (req, res) => { servers.createServer(req,res) });
-
-  server.put("/server", (req, res) => { servers.updateServer(req,res) });
+  server.get("/servers/:server", (req, res) => { servers.getServer(req,res) });
+  server.post("/servers", (req, res) => { servers.createServer(req,res) });
+  server.put("/servers", (req, res) => { servers.updateServer(req,res) });
 
   // channel routes
-  server.get("/channel/:server", (req, res) => { channels.getChannel(req,res) });
-
-  server.post("/channel", (req, res) => { channels.createChannel(req,res) });
-
-  server.put("/channel", (req, res) => { channels.updateChannel(req,res) });
-  
- 
+  server.get("/channels/:channel", (req, res) => { channels.getChannel(req,res) });
+  server.post("/channels", (req, res) => { channels.createChannel(req,res) });
+  server.put("/channels", (req, res) => { channels.updateChannel(req,res) });
 
   // catch all others
   server.all("*", (req, res) => {
     return handle(req, res)
-  })
+  });
   
  // Activeer server
   server.listen(port, err => {
     console.log(process.env.DB_URL)
     if (err) throw err
     console.log(`> Ready on http://localhost:${port}`)
-  })
+  });
 
 })

@@ -9,11 +9,11 @@ export const authenticate = (username, password) => {
 	            "Content-Type": "application/json"
 	        },
 	        body: JSON.stringify({
-			    username: username,
-			    password: password
+			    username,
+			    password
 				})
 			})
-			.then(res => res.json())
+			.then(res => {if(res.status == 200){ return res.json() }})
 			.then (data => data.user[0])
 			.catch(err => {return `something went wrong error: ${err}`});
 	}
@@ -32,7 +32,27 @@ export const registerUser = async (username, password, email) => {
 			    email
 				})
 			})
-			.then(res => res.json())
+			.then(res => {if(res.status == 200){ return res.json() }})
 			.then (data => data.user[0])
+			.catch(err => {return `something went wrong error: ${err}`});
+	}
+
+// Update a users serverslist
+export const updateUser = async (user, servId, servName) => {
+	console.log("adding user: " , user, " to server: ", servName)
+ 	return fetch("http://localhost:3000/users",{
+	 		method: "PUT",
+	        headers: {
+	             "Accept": "application/json",
+	             "Content-Type": "application/json"
+	                   },
+	        body: JSON.stringify({
+			    user,
+			    servName,
+			    servId
+				})
+			})
+			.then(res => {if(res.status == 200){ return res.json() }})
+			.then (data => console.log("return data updateUser: ",data))
 			.catch(err => {return `something went wrong error: ${err}`});
 	}

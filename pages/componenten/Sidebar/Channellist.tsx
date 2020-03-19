@@ -1,68 +1,24 @@
 import React from  "react";
 
-// const channellist = [
-// {
-// 	Channelname:"HIYAAHHH",
-//  	list: 
-// 	[
-// 		{name:"jonesy palace"},
-// 		{name:"jonesy palace"},
-// 		{name:"jonesy palace"},
-// 		{name:"jonesy palace"},
-// 	]
-// },
-// {
-// 	Channelname:"HIYAAHHH",
-//  	list: 
-// 	[
-// 		{name:"jonesy palace"},
-// 		{name:"jonesy palace"},
-// 		{name:"jonesy palace"},
-// 		{name:"jonesy palace"},
-// 	]
-// },
-// {
-// 	Channelname:"HIYAAHHH",
-//  	list: 
-// 	[
-// 		{name:"jonesy palace"},
-// 		{name:"jonesy palace"},
-// 		{name:"jonesy palace"},
-// 		{name:"jonesy palace"},
-// 	]
-// }
-// ]
-
 const ChannelList = ({ list, name, changeChannel })=>{
 
-	const createchannels = (list) =>{
-		return(
-			<ul>
-				{list.map(item => {
-					return(
-						<li id={item._id} onClick={e => changeChannel(e)}><img src="/assets/hash_icoon.svg" alt="hash"/>{item.name}</li>
-						)
-					})
-				}
-			</ul>
-			)
-	}
 
 	return(
+
 		<div>
 			<div className="border">
-				<h3>{name}</h3>
+				<h3>{name}</h3>{console.log("tha list", list.length)}
 			</div>
-			{
-			list.map((item, i) =>{
-					return (<div key={i}>
-								<p>{item.channel_name}</p>
-							</div>
+			<ul>
+			{ list.length ? 
+				list.map(item => {
+					return(
+						<li id={item.id} onClick={e => changeChannel(e)}><img src="/assets/hash_icoon.svg" alt="hash"/>{item.channel_name}</li>
 						)
-				})
-				
+					})
+				: <div><h3>Nothing to see here... Socialize!</h3></div>
 			}
-			
+			</ul>			
 		</div>
 	)
 }

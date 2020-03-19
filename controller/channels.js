@@ -27,7 +27,7 @@ const createChannel = (req,res)=>{
 
 // get channels associated with selected server
 const getChannel = (req,res)=>{
-  const { server } = req.params;
+  const { channel } = req.params;
   // collect channel objects
   Channel
     .find({ _id: channel })
