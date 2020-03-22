@@ -23,7 +23,13 @@ const channelSchema = new mongoose.Schema({
         required: true,
     },
     server: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Server",
+        required: true,
+    },
+    creator: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
         required: true,
     },
     created_at: {

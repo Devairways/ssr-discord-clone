@@ -14,7 +14,7 @@ const Nav = ({ changeRoute, discover })=>{
     		setServers(user.state.data.servers);
     		return;
     	}
-    },[]);
+    },[store]);
 
 	const closeModal = () =>{
 		setModal({ open: false })

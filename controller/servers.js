@@ -52,7 +52,7 @@ const getServer = (req,res)=>{
 
 // update a server channels array
 const updateServer = (req,res)=>{
-  const { chanId, chanName, id } = req.body;
+  const { id, chanId, chanName } = req.body;
   // update server object
   Server
     .update(

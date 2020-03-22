@@ -4,7 +4,11 @@
 	position: absolute;
 	height: 300px;
 	width: 500px;
+	border: 2px solid $grey;
+	padding: 10px;
+	border-radius: 15px;
 	margin-left: 45vw;
 	margin-top: 80px;
 	background: $medium-black;
+	z-index: 5;
 }

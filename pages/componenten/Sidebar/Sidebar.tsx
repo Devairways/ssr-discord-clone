@@ -29,17 +29,17 @@ const SideBar = ({ route, changeChannel })=>{
     },[])
 
     useEffect(()=>{
-    	setServer({...server, server_name: "Home"})
     	if(route && route !== "/"){
     		dataFetch(`servers/${route}`)
     		.then(res => setServer({ server_name: res.server[0].server_name, channels: res.server[0].channels }))
+    	}else{
+    		setServer({...server, server_name: "Home"})
     	}
     },[route])
 
 	return(
 		<div className="gridBox2 SideBar">
-		{console.log("server-time: ", server)}
-			<ChannelList list={route == "/" ? userData.friends : server.channels} name={server.server_name} changeChannel={changeChannel}/>
+			<ChannelList list={route == "/" ? userData.friends : server.channels} name={server.server_name} changeChannel={changeChannel} route={route}/>
 			<UserPanel username={userData.username} _id={userData._id} img={userData.profile_picture ? userData.profile_picture : "/assets/home_icoon.svg"}/>
 		</div>
 	)

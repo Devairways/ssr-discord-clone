@@ -2,11 +2,12 @@ const Channel = require('../models/channel');
 
 // create a new channel
 const createChannel = (req,res)=>{
+  const { id, chanName, servId } = req.body;
 	// create new channel object
   const channel = new Channel({
-    creator: req.body._id,
-    channel_name: req.body.channel_name,
-    server: req.body.server_name
+    creator: id,
+    channel_name: chanName,
+    server: servId
   });
   // push it to channel collection
   channel

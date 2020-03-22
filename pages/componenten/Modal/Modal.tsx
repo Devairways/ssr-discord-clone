@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState, Fragment } from  "react";
 
 import { store } from "../../Services/store";
 import { updateUser } from "../../Services/Users";
-import { createServer } from "../../Services/dataFetch";
+import { createServer, createChannel } from "../../Services/dataFetch";
 
 const Modal = ({ type, params, close })=>{
 	const user = useContext(store);
@@ -10,6 +10,7 @@ const Modal = ({ type, params, close })=>{
 	const [id, setId] = useState("");
 	const [modalView, setModalView] = useState("");
 	const [server, setServer] = useState({ name: "", picture: "", submitted: false });
+	const [channel, setChannel] = useState({ name: "", submitted: false });
 	 
     useEffect(()=>{
     	if (user.state.data){
@@ -19,23 +20,41 @@ const Modal = ({ type, params, close })=>{
     },[])
 
     const handleChange = (e) => {
-    	setServer({ ...server, submitted: false })
-        const { name, value } = e.target;
-        setServer({...server, [name]: value });
+    	if(e.target.placeholder.includes("Server")){
+    		setServer({ ...server, submitted: false })
+	        const { name, value } = e.target;
+	        setServer({...server, [name]: value });
+    	}
+    	else{
+    		setChannel({ ...channel, submitted: false })
+	        const { value } = e.target;
+	        setChannel({...channel, name: value });
+    	}
+    	
     }
 
     const handleSubmit = (action) =>{
-    	setServer({ ...server, submitted: true })
-    	if(!server.name || !server.picture){
-    		return;
-    	}
     	switch(action) {
     		case "addServerToUser":
     			updateUser(id, params.id, params.name);
     			close();
     			break;
 			case "createServer":
-				createServer(id, server.name, server.picture);
+				setServer({ ...server, submitted: true })
+				if(!server.name || !server.picture){
+    				break;
+    			}
+				createServer(id, server.name, server.picture)
+				.then(user => dispatch({type: "userUpdate", payload: user }));
+				close();
+    			break;
+			case "createChannel":
+				setChannel({ ...channel, submitted: true })
+				if(!channel.name){
+    				break;
+    			}
+				createChannel(id, channel.name, params)
+				.then(msg => {if(msg === "succes"){console.log("yeah baby")}});
 				close();
     			break;
     		default:
@@ -46,15 +65,18 @@ const Modal = ({ type, params, close })=>{
 	return(
 		<div id="modal">
 		{ 
-			type === "addServer" ?
+			type === "addServer" && (
 			// Modal for Discover page
 			<div>
 				<span onClick={e => close()}>X</span>
 				<h3>{`So you want to join ${params.name}?`}</h3>
 				<button onClick={e => handleSubmit("addServerToUser")}>Hell Yeah!</button>
 			</div>
-			:
-			// modal for creating server
+			)
+		}
+		{
+			type === "createServer" && (
+			// Modal for creating new server
 			<div>
 				<span onClick={e => close()}>X</span>
 				<form name="Modal" className=""> 
@@ -71,6 +93,27 @@ const Modal = ({ type, params, close })=>{
 	                </div>
 	            </form>
 			</div>
+			)
+		}
+		{
+			type === "createChannel" && (
+			// Modal for creating new channel
+			<div>
+				<span onClick={e => close()}>X</span>
+				<form name="Modal" className=""> 
+	                <div className="">
+	                    <input type="text" className="" name="name" value={channel.name} onChange={handleChange} placeholder="Channel name"/>
+	                    {
+	                    	channel.submitted && !channel.name && 
+	                        <div className="help-block">Please fill out form</div>
+	                    }
+	                </div>
+	                <div className="" >
+	                    <a onClick={e => handleSubmit("createChannel")}>Go</a>
+	                </div>
+	            </form>
+			</div>
+			)
 		}
 		</div>
 	);

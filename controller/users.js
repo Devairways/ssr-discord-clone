@@ -4,8 +4,8 @@ const updateUser = (req,res)=>{
   const { user, servName, servId, param, data} = req.body
   // query mongoDB 
 	User
-    .update(
-      { _id: user },
+    .findByIdAndUpdate(
+      user,
       { $addToSet: { servers: { server_name: servName, id: servId }}},
       {new: true})
     .then( user =>{
