@@ -1,6 +1,7 @@
 const next = require("next");
 const express = require("express");
 const mongoose = require("mongoose");
+const io = require("socket.io")(3001);
 const dotenv = require("dotenv");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
@@ -31,6 +32,12 @@ mongoose.connect(process.env.DB_URL, { useNewUrlParser: true, reconnectTries: 5 
         process.exit(1);
     });
 
+
+// Socket.io hooks
+io.on('connection', (socket) => {
+  socket.on('message', (msg) => { socket.emit(msg, "working like a charm")});
+  socket.on('disconnect', () => {console.log("nooooooooooooooo!?") });
+});
 
 
 // Routes

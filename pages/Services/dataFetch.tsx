@@ -1,6 +1,8 @@
 import React from "react";
 import { updateUser } from "./Users";
 
+
+// for all GET requests
 export const dataFetch = (url) =>{
 	return fetch(`http://localhost:3000/${url}`)
 			.then(res => {if(res.status == 200){ return res.json() }})
@@ -15,24 +17,7 @@ export const dataFetch = (url) =>{
 			.catch(err => console.log("something went wrong: ", err))
 }
 
-export const createServer = async (user, servName, servPicture) => {
- 	return fetch("http://localhost:3000/servers",{
-	 		method: "POST",
-	        headers: {
-	             "Accept": "application/json",
-	             "Content-Type": "application/json"
-	                   },
-	        body: JSON.stringify({
-			    user,
-			    servName,
-			    servPicture
-				})
-			})
-			.then(res => {if(res.status == 200){ return res.json() }})
-			.then (data => updateUser(user, data.createdServer._id, data.createdServer.server_name))
-			.catch(err => {return `something went wrong error: ${err}`});
-	}
-
+// Channel handlers
 export const createChannel = async (id, chanName, servId) => {
  	return fetch("http://localhost:3000/channels",{
 	 		method: "POST",
@@ -48,6 +33,43 @@ export const createChannel = async (id, chanName, servId) => {
 			})
 			.then(res => {if(res.status == 200){ return res.json() }})
 			.then (data => updateServer(servId, data.createdChannel._id, data.createdChannel.channel_name))
+			.catch(err => {return `something went wrong error: ${err}`});
+	}
+
+export const updateChannel = async (user, msg, channel) => {
+ 	return fetch("http://localhost:3000/channels",{
+	 		method: "PUT",
+	        headers: {
+	             "Accept": "application/json",
+	             "Content-Type": "application/json"
+	                   },
+	        body: JSON.stringify({
+			    user,
+			    msg,
+			    channel
+				})
+			})
+			.then(res => {if(res.status == 200){ return res.json() }})
+			.then (data => console.log(data))
+			.catch(err => {return `something went wrong error: ${err}`});
+	}
+
+// Server handlers
+export const createServer = async (user, servName, servPicture) => {
+ 	return fetch("http://localhost:3000/servers",{
+	 		method: "POST",
+	        headers: {
+	             "Accept": "application/json",
+	             "Content-Type": "application/json"
+	                   },
+	        body: JSON.stringify({
+			    user,
+			    servName,
+			    servPicture
+				})
+			})
+			.then(res => {if(res.status == 200){ return res.json() }})
+			.then (data => updateUser(user, data.createdServer._id, data.createdServer.server_name))
 			.catch(err => {return `something went wrong error: ${err}`});
 	}
 

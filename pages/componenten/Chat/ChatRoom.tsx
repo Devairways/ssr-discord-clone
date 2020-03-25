@@ -2,10 +2,10 @@ import React from  "react";
 import ChatBox from  "./Chatbox";
 import MemberList from  "../Memberlist/Memberlist";
 
-const Content = ({ messages })=>{
+const Content = ({ data })=>{
 	return(
 		<div className="flex">
-			<ChatBox/>
+			<ChatBox messages={data.messages} channelId={data._id}/>
 			<MemberList/>
 		</div>
 	)

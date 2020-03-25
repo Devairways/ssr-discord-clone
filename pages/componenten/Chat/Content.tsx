@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { store } from "../../Services/store";
+
 import { dataFetch } from "../../Services/dataFetch";
 
 import Header from  "./Header";
@@ -12,15 +12,14 @@ const Content = ({ channel })=>{
 	useEffect(()=>{
     	if(channel){
     		dataFetch(`channels/${channel}`)
-    		.then(res => setChannelData(res.channelList[0]))
+    		.then(res => {console.log("response from get channel: ",res);setChannelData(res.channelList[0])})
     	}
     },[channel])
   	
 	return(
 		<div className="gridBox3">
-		{console.log(channelData)}
 			<Header channelName={channelData.channel_name}/>
-			<ChatRoom messages={channelData.messages}/>
+			<ChatRoom data={channelData}/>
 		</div>
 	)
 }

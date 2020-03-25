@@ -5,7 +5,7 @@ const messageSchema = new mongoose.Schema({
         type: String,
     },
     author: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: String,
         ref: "User",
     },
     created_at: {
