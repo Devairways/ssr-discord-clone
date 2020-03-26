@@ -2,7 +2,7 @@ import React from  "react";
 import ChatBox from  "./Chatbox";
 import MemberList from  "../Memberlist/Memberlist";
 
-const Content = ({ data })=>{
+const Chatroom = ({ data })=>{
 	return(
 		<div className="flex">
 			<ChatBox messages={data.messages} channelId={data._id}/>
@@ -11,4 +11,4 @@ const Content = ({ data })=>{
 	)
 }
 
-export default Content;
+export default Chatroom;

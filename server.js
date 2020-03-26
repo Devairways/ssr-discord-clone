@@ -32,10 +32,16 @@ mongoose.connect(process.env.DB_URL, { useNewUrlParser: true, reconnectTries: 5 
         process.exit(1);
     });
 
-
+    
 // Socket.io hooks
 io.on('connection', (socket) => {
-  socket.on('message', (msg) => { socket.emit(msg, "working like a charm")});
+
+  console.log("user connected");
+
+  socket.on('isTyping', (user) => { io.emit("typingOn:" + user.channel, user.name)});
+
+  socket.on('message', (msg) => { io.emit(msg.channel, msg)});
+
   socket.on('disconnect', () => {console.log("nooooooooooooooo!?") });
 });
 

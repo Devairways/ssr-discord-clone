@@ -12,7 +12,7 @@ const Content = ({ channel })=>{
 	useEffect(()=>{
     	if(channel){
     		dataFetch(`channels/${channel}`)
-    		.then(res => {console.log("response from get channel: ",res);setChannelData(res.channelList[0])})
+    		.then(res => { setChannelData(res.channelList[0]) })
     	}
     },[channel])
   	
