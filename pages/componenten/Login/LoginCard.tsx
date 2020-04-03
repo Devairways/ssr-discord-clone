@@ -19,7 +19,7 @@ const LoginCard = ({ setRoute }) => {
     
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setlogin({...login, [name]: value, "error": "" });
+        setlogin({...login, [name]: value, error: "" });
     }
 
     const handleSubmit = (e) => {

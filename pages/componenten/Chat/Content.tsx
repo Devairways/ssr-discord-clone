@@ -7,7 +7,7 @@ import ChatRoom from  "./ChatRoom";
 
 
 const Content = ({ channel })=>{
-	const [channelData, setChannelData] = useState({channel_name:"default", messages: []});
+	const [channelData, setChannelData] = useState({channel_name:"", messages: []});
 	
 	useEffect(()=>{
     	if(channel){
@@ -17,7 +17,7 @@ const Content = ({ channel })=>{
     },[channel])
   	
 	return(
-		<div className="gridBox3">
+		<div className="gridBox3">{console.log("rain down on me: ",channel)}
 			<Header channelName={channelData.channel_name}/>
 			<ChatRoom data={channelData}/>
 		</div>

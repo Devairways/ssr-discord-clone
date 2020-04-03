@@ -34,7 +34,7 @@ const serverSchema = new mongoose.Schema({
     },
     server_picture: {
         type: String,
-        default: "/img/placeholder.png",
+        default: "public\assets\home_icoon.svg",
     },
 });
 

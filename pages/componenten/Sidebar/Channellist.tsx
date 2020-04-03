@@ -17,7 +17,10 @@ const ChannelList = ({ list, name, changeChannel, route })=>{
 				<h3>{name}</h3>
 			</div>
 			<ul>
-				<li><h3>channels: <span onClick={e => setModal({open: true})}>+</span></h3></li>
+			{
+				route !== "/" && <li><h3>channels: <span onClick={e => setModal({open: true})}>+</span></h3></li>
+			}
+				
 			{   
 				list.length ? 
 				    list.map(item => {

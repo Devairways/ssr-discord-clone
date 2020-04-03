@@ -55,7 +55,7 @@ const ChatBox = ({ messages, channelId })=>{
 		    		list.map(msg => {
 		    		return(
 		    			<div className="chatMsg">
-		    				<h3>{msg.author}<span style={{fontSize:"small", paddingLeft:"10px"}}>{msg.created_at}</span></h3>
+		    				<h3>{msg.author}<span style={{fontSize:"small", paddingLeft:"10px"}}>{msg.created_at? new Date(msg.created_at).toLocaleString():new Date().toLocaleString()}</span></h3>
 		    				<p>{msg.text}</p>
 		    			</div>
 		    			)

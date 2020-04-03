@@ -9,7 +9,7 @@ const Modal = ({ type, params, close })=>{
 	const { dispatch } = user;
 	const [id, setId] = useState("");
 	const [modalView, setModalView] = useState("");
-	const [server, setServer] = useState({ name: "", picture: "", submitted: false });
+	const [server, setServer] = useState({ name: "", picture: "", submitted: false, err: "" });
 	const [channel, setChannel] = useState({ name: "", submitted: false });
 	 
     useEffect(()=>{
@@ -36,12 +36,21 @@ const Modal = ({ type, params, close })=>{
     const handleSubmit = (action) =>{
     	switch(action) {
     		case "addServerToUser":
+				if(user.state.data.servers.length >= 5){
+					setServer({...server, err: "Sorry no more then 5 servers per user"})
+					break;
+				}
     			updateUser(id, params.id, params.name);
     			close();
     			break;
 			case "createServer":
+				if(user.state.data.servers.length >= 5){
+					setServer({...server, err: "Sorry no more then 5 servers per user"})
+					break;
+				}
 				setServer({ ...server, submitted: true })
-				if(!server.name || !server.picture){
+				if(!server.name){
+					setServer({...server, err: "Please enter a Server name"})
     				break;
     			}
 				createServer(id, server.name, server.picture)
@@ -70,6 +79,7 @@ const Modal = ({ type, params, close })=>{
 			<div>
 				<span onClick={e => close()}>X</span>
 				<h3>{`So you want to join ${params.name}?`}</h3>
+				<span className="form__error">{server.err}</span>
 				<button onClick={e => handleSubmit("addServerToUser")}>Hell Yeah!</button>
 			</div>
 			)
@@ -88,6 +98,7 @@ const Modal = ({ type, params, close })=>{
 	                        <div className="help-block">Please fill out form</div>
 	                    }
 	                </div>
+					<span className="form__error">{server.err}</span>
 	                <div className="" >
 	                    <a onClick={e => handleSubmit("createServer")}>Go</a>
 	                </div>

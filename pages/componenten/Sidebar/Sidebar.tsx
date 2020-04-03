@@ -40,7 +40,7 @@ const SideBar = ({ route, changeChannel })=>{
 	return(
 		<div className="gridBox2 SideBar">
 			<ChannelList list={route == "/" ? userData.friends : server.channels} name={server.server_name} changeChannel={changeChannel} route={route}/>
-			<UserPanel username={userData.username} _id={userData._id} img={userData.profile_picture ? userData.profile_picture : "/assets/home_icoon.svg"}/>
+			<UserPanel username={userData.username} _id={userData._id} img={userData.profile_picture}/>
 		</div>
 	)
 }
