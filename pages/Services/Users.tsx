@@ -33,13 +33,12 @@ export const registerUser = async (username, password, email) => {
 				})
 			})
 			.then(res => {if(res.status == 200){ return res.json() }})
-			.then (data => data.user[0])
+			.then (data => data)
 			.catch(err => {return `something went wrong error: ${err}`});
 	}
 
 // Update a users serverslist
 export const updateUser = (user, servId, servName) => {
-	console.log("adding user: " , user, " to server: ", servName)
  	return fetch("http://localhost:3000/users",{
 	 		method: "PUT",
 	        headers: {

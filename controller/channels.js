@@ -19,7 +19,6 @@ const createChannel = (req,res)=>{
       });
     })
     .catch(err => {
-      console.log(err);
       res.status(500).json({
         error: err
       });
@@ -39,7 +38,6 @@ const getChannel = (req,res)=>{
       });
     })
     .catch(err => {
-      console.log(err);
       res.status(500).json({
         error: err
       });
@@ -48,7 +46,6 @@ const getChannel = (req,res)=>{
 
 // update a channel messages array
 const updateChannel = (req,res)=>{
-  console.log(req.body)
   const { user, msg, channel } = req.body;
   // update channel object
   Channel
@@ -62,7 +59,6 @@ const updateChannel = (req,res)=>{
       });
     })
     .catch(err => {
-      console.log(err);
       res.status(500).json({
         error: err
       });

@@ -9,7 +9,7 @@ const StateProvider = ( { children } ) => {
     switch(action.type) {
       case "userLogin":
         return Object.assign({}, state, { data:action.payload, authed:true });
-        case "userUpdate":
+      case "userUpdate":
         return Object.assign({}, state, { data:action.payload, authed:true });
       default:
         throw new Error();

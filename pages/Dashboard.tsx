@@ -22,14 +22,12 @@ const DashBoard = () => {
 
 	const changeRoute = (newRoute) =>{
 		const { id } = newRoute.target;
-		setDiscover(false)
-		console.log("new Route : ", id);
+		setDiscover(false);
 		setRoute(id);
 	}
 
 	const changeChannel = (newChannel) =>{
 		const { id } = newChannel.target;
-		console.log("new channel: ",id);
     	setChannel(id);
     }
 
@@ -44,7 +42,7 @@ const DashBoard = () => {
 				discover ? <Discover/> :
 				<Fragment>
 					<SideBar route={route} changeChannel={changeChannel}/>
-					<Content channel={channel}/>
+					<Content route={route} channel={channel}/>
 				</Fragment>
 			}
 			

@@ -42,7 +42,7 @@ io.on('connection', (socket) => {
 
   socket.on('message', (msg) => { io.emit(msg.channel, msg)});
 
-  socket.on('disconnect', () => {console.log("nooooooooooooooo!?") });
+  socket.on('disconnect', () => { console.log("Baby, please dont gooooowwww") });
 });
 
 
@@ -93,7 +93,6 @@ app.prepare().then(() => {
   
  // Activeer server
   server.listen(port, err => {
-    console.log(process.env.DB_URL)
     if (err) throw err
     console.log(`> Ready on http://localhost:${port}`)
   });

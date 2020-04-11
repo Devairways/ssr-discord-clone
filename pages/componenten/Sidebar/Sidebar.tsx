@@ -10,13 +10,13 @@ const SideBar = ({ route, changeChannel })=>{
 	const [server, setServer] = useState({
 										server_name: "",
 										channels:[]
-										})
+									});
 	const [userData, setData] = useState({
 									  username: "",
 	                                  _id: "",
 	                                  profile_picture: "",
 	                                  friends: []
-	                                }) 
+	                                });
     useEffect(()=>{
     	if (user.state.data){
     		setData({

@@ -32,20 +32,21 @@ const ChatBox = ({ messages, channelId })=>{
 
     const handleSubmit = () => {
     	if(!message.author || !message.text){
-    		return console.log("plz fill in allllll");
+    		return;
     	}
 		socket.emit("message", { channel: channelId, author: message.author, text: message.text});
     	updateChannel(message.author, message.text, channelId);
 		setMessage({ ...message, text: "" })
 	}
-	
-	const resetTyping = () =>{
+	//put "Who`s typing" on screen
+	const handleTyping = (username) =>{
+		setTyping({ typing: true, name: username });
 		setTimeout(()=>{setTyping({ typing: false, name: "" })},2000);
 	}
 
-    // Listen to connections(Need to find better way)
+    // Listening to connections(Need to find better way)
 	socket.off(channelId).on(channelId, data => setList([...list, data]));
-	socket.off(`typingOn:${channelId}`).on(`typingOn:${channelId}`, data => { setTyping({ typing: true, name: data }); resetTyping() });
+	socket.off(`typingOn:${channelId}`).on(`typingOn:${channelId}`, username => handleTyping(username));
 
 	return(
 		<div className="flexBox1">

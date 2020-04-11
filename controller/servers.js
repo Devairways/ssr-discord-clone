@@ -19,7 +19,6 @@ const createServer = (req,res)=>{
       });
     })
     .catch(err => {
-      console.log(err);
       res.status(500).json({
         error: err
       });
@@ -36,6 +35,7 @@ const getServer = (req,res)=>{
   // collect server objects
   Server
     .find(filter)
+    .populate("participants")
     .then(result => {
       res.status(200).json({
         message: "server gevonden",
@@ -43,7 +43,6 @@ const getServer = (req,res)=>{
       });
     })
     .catch(err => {
-      console.log(err);
       res.status(500).json({
         error: err
       });
@@ -60,7 +59,6 @@ const updateServer = (req,res)=>{
     { $addToSet: { channels: { id: chanId, channel_name: chanName} }},
     (error, success) =>{
         if (error) {
-            console.log(error);
             res.status(500).json({
             message: "could not update server"
             });
@@ -72,7 +70,6 @@ const updateServer = (req,res)=>{
       });
     })
     .catch(err => {
-      console.log(err);
       res.status(500).json({
         error: err
       });

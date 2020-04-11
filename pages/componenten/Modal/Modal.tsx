@@ -34,9 +34,13 @@ const Modal = ({ type, params, close })=>{
     }
 
     const handleSubmit = (action) =>{
+		let exceeded = false;
+		if(user.state.data.servers.length >= 5){
+			exceeded = true;
+		}
     	switch(action) {
     		case "addServerToUser":
-				if(user.state.data.servers.length >= 5){
+				if(exceeded){
 					setServer({...server, err: "Sorry no more then 5 servers per user"})
 					break;
 				}
@@ -44,7 +48,7 @@ const Modal = ({ type, params, close })=>{
     			close();
     			break;
 			case "createServer":
-				if(user.state.data.servers.length >= 5){
+				if(exceeded){
 					setServer({...server, err: "Sorry no more then 5 servers per user"})
 					break;
 				}

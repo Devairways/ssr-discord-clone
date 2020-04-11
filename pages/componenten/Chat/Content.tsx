@@ -6,7 +6,7 @@ import Header from  "./Header";
 import ChatRoom from  "./ChatRoom";
 
 
-const Content = ({ channel })=>{
+const Content = ({ route, channel })=>{
 	const [channelData, setChannelData] = useState({channel_name:"", messages: []});
 	
 	useEffect(()=>{
@@ -17,9 +17,9 @@ const Content = ({ channel })=>{
     },[channel])
   	
 	return(
-		<div className="gridBox3">{console.log("rain down on me: ",channel)}
+		<div className="gridBox3">
 			<Header channelName={channelData.channel_name}/>
-			<ChatRoom data={channelData}/>
+			<ChatRoom route={route} data={channelData}/>
 		</div>
 	)
 }
