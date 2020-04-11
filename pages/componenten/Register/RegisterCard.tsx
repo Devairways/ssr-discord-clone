@@ -33,7 +33,7 @@ const RegisterCard = ({ setRoute }) => {
         }
         setRegister({...register, loading: true });
         registerUser(username, password, email)
-        .then(data => {if(data.message){Router.push("/"); setRoute("/")}});
+        .then(data => { if( data.message === "Nieuwe gebruiker toegevoegd" ){Router.push("/"); setRoute("/")} });
     }
 
         return(

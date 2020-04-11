@@ -8,7 +8,7 @@ const Chatroom = ({ route, data })=>{
 		{
 			route !== "/" ? <ChatBox messages={data.messages} channelId={data._id}/> : <h3 className="flexBox1">Hellooooo</h3>
 		}
-			<MemberList/>
+			<MemberList route={route}/>
 		</div>
 	)
 }

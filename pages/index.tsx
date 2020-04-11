@@ -16,7 +16,7 @@ const IndexPage = () => {
         setLoading(false);
     },[])
     
-        return(route && !loading ? 
+        return( route && !loading ? 
             <div>
             {
                 route == "/" ? <LoginCard setRoute={setRoute}/> : <RegisterCard setRoute={setRoute}/>

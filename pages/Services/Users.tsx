@@ -1,6 +1,6 @@
 import React from "react";
 
-//authenticate login credentials
+//Authenticate login credentials
 export const authenticate = (username, password) => {
 	return fetch("http://localhost:3000/",{
 			method: "POST",
@@ -32,7 +32,7 @@ export const registerUser = async (username, password, email) => {
 			    email
 				})
 			})
-			.then(res => {if(res.status == 200){ return res.json() }})
+			.then(res => { if(res.status == 200){ return res.json() }})
 			.then (data => data)
 			.catch(err => {return `something went wrong error: ${err}`});
 	}
