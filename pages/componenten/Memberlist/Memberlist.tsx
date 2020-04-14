@@ -8,7 +8,7 @@ const MemberList = ({ route })=>{
 	useEffect(()=>{
     	if(route && route !== "/"){
     		dataFetch(`servers/${route}`)
-    		.then(res => console.log(res));
+    		.then(res => setParticipants(res.server[0].participants));
     	}else{
     		setParticipants([]);
     	}
@@ -17,13 +17,12 @@ const MemberList = ({ route })=>{
 	return(
 		<div className="flexBox2">
 			<h3>MemberList</h3>
-			{console.log("changing users, ", route, participants)}
 			<ul>
 			{   
 				participants.length ? 
 				    participants.map(user => {
 						return(
-							<li id={user._id} style={{padding: "5px"}}><img src={user. profile_picture} height="20px"  alt="hash"/>{user.username}</li>
+							<li id={user._id} style={{padding: "5px"}}><img src={user.profile_picture} style={{marginBottom: "-10px", paddingRight: "5px"}} height="30px"  alt="hash"/>{user.username}</li>
 							)
 						})
 				: <div><h3>Nothing to see here... Socialize!</h3></div>

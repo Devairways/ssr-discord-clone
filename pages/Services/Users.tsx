@@ -1,5 +1,7 @@
 import React from "react";
 
+import { updateServer } from "./dataFetch";
+
 //Authenticate login credentials
 export const authenticate = (username, password) => {
 	return fetch("http://localhost:3000/",{
@@ -32,8 +34,7 @@ export const registerUser = async (username, password, email) => {
 			    email
 				})
 			})
-			.then(res => { if(res.status == 200){ return res.json() }})
-			.then (data => data)
+			.then(res => { if(res.status == 200){ return res.json() } throw "error";})
 			.catch(err => {return `something went wrong error: ${err}`});
 	}
 
@@ -52,6 +53,7 @@ export const updateUser = (user, servId, servName) => {
 				})
 			})
 			.then(res => {if(res.status == 200){ return res.json() }})
+			.then (data => {updateServer(servId,null,null,user); return data})
 			.then (data => data.user)
 			.catch(err => {return `something went wrong error: ${err}`});
 	}

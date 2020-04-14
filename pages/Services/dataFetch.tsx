@@ -32,7 +32,7 @@ export const createChannel = async (id, chanName, servId) => {
 				})
 			})
 			.then(res => {if(res.status == 200){ return res.json() }})
-			.then (data => updateServer(servId, data.createdChannel._id, data.createdChannel.channel_name))
+			.then (data => updateServer(servId, data.createdChannel._id, data.createdChannel.channel_name, null))
 			.catch(err => {return `something went wrong error: ${err}`});
 	}
 
@@ -69,11 +69,13 @@ export const createServer = async (user, servName, servPicture) => {
 				})
 			})
 			.then(res => {if(res.status == 200){ return res.json() }})
+			.then (data => {updateServer(data.createdServer._id,null,null,user); return data})
 			.then (data => updateUser(user, data.createdServer._id, data.createdServer.server_name))
 			.catch(err => {return `something went wrong error: ${err}`});
 	}
 
-export const updateServer = async (id, chanId, chanName) => {
+export const updateServer = async (id, chanId, chanName, user) => {
+	console.log("working on it")
  	return fetch("http://localhost:3000/servers",{
 	 		method: "PUT",
 	        headers: {
@@ -83,7 +85,8 @@ export const updateServer = async (id, chanId, chanName) => {
 	        body: JSON.stringify({
 			    id,
 			    chanId,
-			    chanName
+				chanName,
+				user
 				})
 			})
 			.then(res => {if(res.status == 200){ return res.json() }})

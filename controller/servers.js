@@ -51,9 +51,34 @@ const getServer = (req,res)=>{
 
 // update a server channels array
 const updateServer = (req,res)=>{
-  const { id, chanId, chanName } = req.body;
+  const { id, chanId, chanName, user } = req.body;
+  console.log("user=item:, ",user)
   // update server object
-  Server
+  if(user){
+    Server
+    .update(
+    { _id: id }, 
+    { $addToSet: { participants: user }},
+    (error, success) =>{
+        if (error) {
+            res.status(500).json({
+            message: "could not update server"
+            });
+        }
+    })
+    .then(result => {
+      res.status(200).json({
+        message: "succes"
+      });
+    })
+    .catch(err => {
+      res.status(500).json({
+        error: err
+      });
+    });
+  }
+  else{
+    Server
     .update(
     { _id: id }, 
     { $addToSet: { channels: { id: chanId, channel_name: chanName} }},
@@ -74,6 +99,8 @@ const updateServer = (req,res)=>{
         error: err
       });
     });
+  }
+  
 };
 
 

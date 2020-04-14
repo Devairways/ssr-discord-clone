@@ -8,17 +8,17 @@ const Modal = ({ type, params, close })=>{
 	const user = useContext(store);
 	const { dispatch } = user;
 	const [id, setId] = useState("");
-	const [modalView, setModalView] = useState("");
 	const [server, setServer] = useState({ name: "", picture: "", submitted: false, err: "" });
 	const [channel, setChannel] = useState({ name: "", submitted: false });
-	 
+	
+	// on componentmount set the user-id
     useEffect(()=>{
     	if (user.state.data){
     		setId(user.state.data._id);
-    		setModalView(type);
     	}
-    },[])
-
+	},[])
+	
+    // handler for new input formfields
     const handleChange = (e) => {
     	if(e.target.placeholder.includes("Server")){
     		setServer({ ...server, submitted: false })
@@ -32,7 +32,7 @@ const Modal = ({ type, params, close })=>{
     	}
     	
     }
-
+    // handler function for submitting form
     const handleSubmit = (action) =>{
 		let exceeded = false;
 		if(user.state.data.servers.length >= 5){
@@ -44,7 +44,8 @@ const Modal = ({ type, params, close })=>{
 					setServer({...server, err: "Sorry no more then 5 servers per user"})
 					break;
 				}
-    			updateUser(id, params.id, params.name);
+				updateUser(id, params.id, params.name)
+				.then(user => dispatch({type: "userUpdate", payload: user }));
     			close();
     			break;
 			case "createServer":

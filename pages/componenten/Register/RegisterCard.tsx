@@ -28,12 +28,12 @@ const RegisterCard = ({ setRoute }) => {
         setRegister({...register, submitted: true });
         const { username, password, password2, email } = register;
         // check for required inputs
-        if (!(username && password && password2 && email)) {
-            return;
+        if (!(username && password && password2 && email)|| password !== password2 ) {
+            return setRegister({...register, error:"something went wrong"});
         }
         setRegister({...register, loading: true });
         registerUser(username, password, email)
-        .then(data => { if( data.message === "Nieuwe gebruiker toegevoegd" ){Router.push("/"); setRoute("/")} });
+        .then(data => { if(data.message){Router.push("/"); setRoute("/")} });
     }
 
         return(
