@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from  "react";
 import { socket } from "./Socket";
 
-import { store } from "../../Services/store";
+import { store } from "../../Services/Store";
 import { updateChannel } from "../../Services/dataFetch";
 
 
