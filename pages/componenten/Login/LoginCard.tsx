@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import Link from "next/link";
 import Router from "next/router";
 
-import { store } from "../../Services/store";
+import { store } from "../../Services/Store";
 import { authenticate } from "../../Services/Users";
 
 

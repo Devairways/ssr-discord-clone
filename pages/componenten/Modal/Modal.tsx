@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState, Fragment } from  "react";
 
-import { store } from "../../Services/store";
+import { store } from "../../Services/Store";
 import { updateUser } from "../../Services/Users";
 import { createServer, createChannel } from "../../Services/dataFetch";
 
